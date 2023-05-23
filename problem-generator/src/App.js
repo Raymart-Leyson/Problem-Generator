@@ -1,59 +1,61 @@
+import React, { useState } from 'react';
 import './App.css';
+import ViewQuestionPopup from './ViewQuestionPopup';
 
 function App() {
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
+  const handleQuestionClick = (index) => {
+    setSelectedQuestion(questionslist[index]);
+    setPopupVisible(true);
+  };
 
   const questionslist = [
     {
-      question: "In a deterministic finite automaton (DFA), each input symbol can have how many transitions from a given state? ",
-      choice: ["A) One", "B) Zero or one", "C) Zero or more", "D) Exactly two"]
+      question: "All Finite Language are turing decidable.",
+      choice: ["TRUE or FALSE"]
     },
     {
-      question: "The language defined by the regular expression (a + b)*abb is equivalent to which of the following?",
-      choice: ["A) The set of all strings that end with abb", "B) The set of all strings that start with abb", "C) The set of all strings that contain abb", "D) The set of all strings that do not contain abb"]
+      question: "All turing decidable are turing acceptable.",
+      choice: ["TRUE or FALSE"]
     },
     {
-      question: "Which of the following is NOT a property of regular languages?",
-      choice: ["A) Closed under union", "B) Closed under intersection", "C) Closed under complement", "D) Closed under concatenation"]
+      question: "(ababb) is an element of L = {(a+b)*aa+bb}",
+      choice: ["TRUE or FALSE"]
     },
     {
-      question: "The pumping lemma for regular languages is used to prove that a language is not regular. Which of the following is a requirement for using the pumping lemma?",
-      choice: ["A) The language is finite", "B) The language is infinite", "C) The language contains only a's and b's", "D) The language is context-free"]
+      question: "For any language L, e is an element of L+.",
+      choice: ["TRUE or FALSE"]
     }
   ];
 
-
-
   return (
-    <div className="ProblemGenerator" >
+    <div className="ProblemGenerator">
       <div className="mainUI">
-        <div className="title">PERPETUAL</div>
         <div className="input-container">
-          <input type="text" className="generate" placeholder="Type here"></input>
+          <input type="text" className="generate"></input>
           <button className="btn_generate">Generate</button>
         </div>
         <div className="question-box-container">
           <ul>
             {questionslist.map((question, index) => (
-              <li key={index}>
-                <div className="question">
-                  {question.question}
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <div className="choices">
-                  <div className="choices-grid">
-                    {question.choice.map((option, index) => (
-                      <div key={index} className="choice">{option}</div>
-                    ))}
-                  </div>
-                  </div>
-                </div>
+              <li key={index} onClick={() => handleQuestionClick(index)}>
+                <div className="question">{question.question}</div>
+                <div className="choice">{question.choice}</div>
               </li>
             ))}
           </ul>
         </div>
       </div>
-      <div className="space"></div>
+
+      {isPopupVisible && (
+        <ViewQuestionPopup
+          question={selectedQuestion.question}
+          choice={selectedQuestion.choice}
+          onClose={() => setPopupVisible(false)}
+        />
+      )}
     </div>
   );
 }

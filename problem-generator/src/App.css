@@ -1,3 +1,7 @@
+.ProblemGenerator {
+  position: relative;
+  backdrop-filter: blur(5px); /* Adjust the blur value as desired */
+}
 
 body {
   margin: 0;
@@ -19,7 +23,6 @@ body {
   text-align: center;
   margin-bottom: 50px;
 }
-
 
 body:before {
   content: "";
@@ -91,7 +94,7 @@ body:after{
 }
 
 .question-box-container{
-  margin-left: -45px;
+  margin-left: -40px;
   width: fit-content;
   height: fit-content;
   display: flexbox;
@@ -104,10 +107,9 @@ ul{
   grid-gap: 20px;
 }
 
-li{
-  display: inline-block;
-  list-style: none;
-  padding: 0;
+li {
+  position: relative;
+  padding: 20px;
   width: 850px;
   height: 300px;
   justify-content: center;
@@ -117,6 +119,31 @@ li{
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
 }
 
+li:before{
+  content: '';
+  position: absolute;
+  top: 125px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(2px);
+  mask: linear-gradient(transparent, black 5%);;
+}
+
+.question-box-container li::after {
+  content: "Click to view full question";
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #0334fa;
+  font-size: 21px;
+  border-radius: 4px;
+  pointer-events: none;
+  backdrop-filter: blur(2px); /* Adjust the blur value as desired */
+}
 
 .question{
   position: relative;
@@ -148,9 +175,4 @@ li{
 .space{
   width: .1px;
   height: 20px;
-}
-
-.question-box.overflown {
-  opacity: 30;
-  background-color: red; /* Apply transparency or any other desired effect */
 }
