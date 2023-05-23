@@ -21,9 +21,11 @@
     border: none;
     background-color: red;
     color: white;
-    padding: 5px;
+    padding: 10px;
+    width: 150px;
     font-size: smaller;
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
+    font-size: 25px;
 }
 
 .choices {
@@ -32,7 +34,6 @@
     font-size: large;
     background-color: transparent;
     font-weight: bold;
-    width: fit-content;
+    width: relative;
     height: fit-content;
 }
-
