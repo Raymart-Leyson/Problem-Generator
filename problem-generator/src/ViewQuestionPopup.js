@@ -8,11 +8,10 @@ function ViewQuestionPopup({ question, choice, onClose }) {
           <h2>{question}</h2>
           <ul>
             {choice.map((option, index) => (
-              <li key={index}>{option}</li>
+              <li key={index} className=' choices'>{option}</li>
             ))}
           </ul>
         </div>
-
         <button className="close-popup" onClick={onClose}>
           Close
         </button>
