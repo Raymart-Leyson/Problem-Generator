@@ -13,7 +13,7 @@ body::before {
   background-image: url('./Background.png');
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: .65; /* Adjust the opacity value as needed */
+  opacity: 0.08; /* Adjust the opacity value as needed */
   position: absolute;
   top: 0;
   left: 0;
@@ -27,8 +27,10 @@ body::before {
   background-color: #F6F6F6;
   height: 820px;
   width: 1350px;
-  border: black 3.5px solid;
-  border-radius: 10px;
+}
+
+.input-container {
+  background-color: #F6F6F6;
 }
 
 .generate {
