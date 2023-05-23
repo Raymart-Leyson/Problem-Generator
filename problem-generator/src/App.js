@@ -1,6 +1,26 @@
 import './App.css';
 
 function App() {
+
+  const questionslist = [
+    {
+      question: "All Finite Language are turing decidable.",
+      choice: "TRUE or FALSE"
+    },
+    {
+      question: "All turing decidable are turing acceptable.",
+      choice: "TRUE or FALSE"
+    },
+    {
+      question: "(ababb) is an element of L = {(a+b)*aa+bb}",
+      choice: "TRUE or FALSE"
+    },
+    {
+      question: "For any language L, e is an element of L+.",
+      choice: "TRUE or FALSE"
+    }
+  ];
+
   return (
     <div className="ProblemGenerator" >
       <div className="mainUI">
@@ -10,26 +30,15 @@ function App() {
         </div>
         <div className="question-box-container">
           <ul>
-          <li>
-            <div className="question">All Finite Language are turing decidable.</div>
-            <div className="choice">TRUE or FALSE</div>
-          </li>
-          <li>
-            <div className="question">All turing decidable are turing acceptable.</div>
-            <div className="choice">TRUE or FALSE</div>
-          </li>
-          <li>
-            <div className="question">(ababb) is an element of L = &#123;(a+b)&#125;*aa+bb&#125;</div>
-            <div className="choice">TRUE or FALSE</div>
-          </li>
-          <li>
-            <div className="question">For any language L, e is an element of L+.</div>
-            <div className="choice">TRUE or FALSE</div>
-          </li>
+            {questionslist.map((question, index) => (
+              <li key={index}>
+                <div className="question">{question.question}</div>
+                <div className="choice">{question.choice}</div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-      
     </div>
   );
 }
