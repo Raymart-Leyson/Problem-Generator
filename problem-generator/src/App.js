@@ -1,12 +1,17 @@
 import React, {useState } from 'react';
 import './App.css';
 import ViewQuestionPopup from './ViewQuestionPopup';
-import HoverElement from './HoverElement';
 
 function App() {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isBackgroundBlurred, setBackgroundBlurred] = useState(false);
 
+  const handlePopupClose = () => {
+    setPopupVisible(false);
+    setBackgroundBlurred(false);
+  };
+  
   const handleQuestionClick = (index) => {
     setSelectedQuestion(questionslist[index]);
     setPopupVisible(true);
@@ -32,7 +37,7 @@ function App() {
   ];
 
   return (
-    <div className="ProblemGenerator">
+    <div className={`ProblemGenerator ${isPopupVisible ? 'blurred' : ''}`}>
       <div className="mainUI">
         <div className="title">PERPETUAL</div>
         <div className="input-container">
@@ -50,6 +55,7 @@ function App() {
                 <br></br>
                 <br></br>
                 <br></br>
+                <br></br>
                 <div className="choices">
                   <div className="choices-grid">
                     {question.choice.map((option, index) => (
@@ -59,13 +65,9 @@ function App() {
                   </div>
                 </div>
                 {question.question.length > 300 && (
-                  <HoverElement>
-                    <div
-                      className="click-to-view"
-                      onClick={() => handleQuestionClick(index)}
-                    >
+                    <div className="click-to-view" onClick={() => handleQuestionClick(index)}>
+                      <button className="view-button">View Full Question</button>
                     </div>
-                  </HoverElement>
                 )}
               </li>
             ))}
@@ -75,11 +77,14 @@ function App() {
       </div>
 
       {isPopupVisible && (
-        <ViewQuestionPopup
-          question={selectedQuestion.question}
-          choice={selectedQuestion.choice}
-          onClose={() => setPopupVisible(false)}
-        />
+        <React.Fragment>
+          <div className="overlay" onClick={handlePopupClose}></div>
+          <ViewQuestionPopup
+            question={selectedQuestion.question}
+            choice={selectedQuestion.choice}
+            onClose={handlePopupClose}
+          />
+        </React.Fragment>
       )}
     </div>
   );
